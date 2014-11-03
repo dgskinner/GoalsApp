@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :require_logged_in, only: :destroy
+  
   def new
     @user = User.new
     render :new
@@ -10,16 +12,17 @@ class SessionsController < ApplicationController
       params[:user][:password]
     )
     if @user
+      log_in!(@user)
       redirect_to user_url(@user)
     else
-      flash.now[:errors] = @user.errors.full_messages
+      @user = User.new(username: params[:user][:username])
+      flash.now[:errors] = ["Invalid Username or Password"]
       render :new
     end
   end
   
   def destroy
-    session[:session_token] = nil
-    current_user.reset_session_token!
+    log_out!
     redirect_to new_session_url
   end
 end
