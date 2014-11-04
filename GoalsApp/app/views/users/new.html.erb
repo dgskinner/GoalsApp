@@ -1,11 +1,11 @@
 <%= render 'layouts/errors' %>
-
 <h1>>Sign Up</h1>
-
+<% 5.times do %>
+<h1> Jeff Rulz </h1>
+<% end %>
 <form
   action="<%= users_url %>"
   method="POST">
-  
   <input
     type="hidden"
     name="authenticity_token"

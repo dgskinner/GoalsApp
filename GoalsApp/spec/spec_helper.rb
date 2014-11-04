@@ -13,5 +13,11 @@ def sign_up(username, password)
   click_button("Sign Up")
 end
 
-def help_me_gods
+def create_goal(status, privacy)
+  click_button("Create Goal")
+  fill_in("Title", with: Faker::Hacker.verb)
+  fill_in("Description", with: Faker::Hacker.say_something_smart)
+  choose(status)
+  choose(privacy)
+  click_button("Submit Goal")
 end
