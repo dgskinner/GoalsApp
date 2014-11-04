@@ -12,9 +12,12 @@
 #  updated_at  :datetime
 #
 
-FactoryGirl.define do
-  factory :goal do
-    title "Goal Title"
-    description "Goal Description"
+class Goal < ActiveRecord::Base
+  validates :title, :description, :privacy, :status, :user, presence: true
+  
+  belongs_to :user
+  
+  def is_private?
+    self.privacy == "Private"
   end
 end
